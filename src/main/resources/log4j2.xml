@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="WARN">
+  <Properties>
+    <Property name="log-path">../standalone/log</Property>
+  </Properties>
+  <Appenders>
+    <Console name="console" target="SYSTEM_OUT">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level]- %c{1} - %msg%n" />
+    </Console>
+    <RollingFile name="RollingFile" fileName="${log-path}/web-services.log" filePattern="${log-path}/web-services-%d{yyyy-MM-dd}-%i.log">
+      <PatternLayout pattern="%d{yyyy-MM-dd HH:mm:ss.SSS} [%-5level]- %c{1} - %msg%n" />
+      <Policies>
+        <SizeBasedTriggeringPolicy size="10 MB" />
+      </Policies>
+      <DefaultRolloverStrategy max="10" />
+    </RollingFile>
+  </Appenders>
+  <Loggers>
+    <Logger name="root" level="info" additivity="false">
+      <appender-ref ref="RollingFile" level="info" />
+    </Logger>
+    <Root level="info" additivity="false">
+      <AppenderRef ref="console" />
+      <AppenderRef ref="RollingFile" />
+    </Root>
+  </Loggers>
+</Configuration>
